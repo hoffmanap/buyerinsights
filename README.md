@@ -57,7 +57,9 @@ To replace the specific matching weight of the missing lender variable, the pipe
 
 ### Stage 3: Probabilistic Corroboration & Demographic Triage
 When multiple candidate applications in the credit register share duplicate spatial and financial parameters within the same census tract, the pipeline applies a probabilistic triage layer using consumer demographic data from **Data Axle Mover**:
-* **Address Standardization Engine (`advanced_address_cleaner`):** Programmatically strips structural unit noise (e.g., `"Apt 2"`, `"Suite C"`) and standardizes suffixes (e.g., `"Avenue"` $ightarrow$ `"Ave"`, `"Drive"` $ightarrow$ `"Dr"`) across datasets to maximize string overlap.
+* **Address Standardization Engine (`advanced_address_cleaner`):** Programmatically strips structural unit noise (e.g., `"Apt 2"`, `"Suite C"`) and standardizes suffixes (e.g., `"Avenue"` $
+ightarrow$ `"Ave"`, `"Drive"` $
+ightarrow$ `"Dr"`) across datasets to maximize string overlap.
 * **Fuzzy Alignment Arrays:** The system uses the `rapidfuzz` library alongside pre-indexed numpy lookup arrays to calculate character distance metrics (`data_axle_fuzzy_match_score`).
 * **Demographic Weight Matrix:** Matches are assigned confidence scoring based on intersecting consumer keys:
   * Matching Gender / Sex Configuration: **+1 Point**
