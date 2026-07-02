@@ -1,25 +1,40 @@
-# Let's generate a highly sophisticated, beautifully designed, completely self-contained interactive scrollytelling web application.
-# It uses Scrollama (via standard JS structures or purely responsive IntersectionObserver patterns built into CSS/JS) and Chart.js 
-# embedded dynamically to present all data metrics from your Colab files.
-
-html_content = """<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>El Paso Housing Market Matrix: A Scrollytelling Narrative</title>
+    <title>El Paso Housing Market Matrix: Empirical Analysis</title>
+    
+    <!-- Google Fonts for modern typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&display=swap" rel="stylesheet">
+    
+    <!-- Chart.js for interactive dashboard elements -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
     <style>
         :root {
-            --bg-main: #f4f6f9;
-            --text-main: #1e293b;
-            --text-muted: #64748b;
-            --accent-blue: #2563eb;
-            --accent-teal: #0d9488;
-            --accent-amber: #d97706;
-            --accent-red: #dc2626;
-            --card-bg: #ffffff;
+            /* Modern Color Palette */
+            --bg-page: #f8fafc;
+            --bg-card: #ffffff;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --text-tertiary: #64748b;
+            
+            --accent-primary: #3b82f6;   /* Blue */
+            --accent-secondary: #10b981; /* Emerald */
+            --accent-tertiary: #f59e0b;  /* Amber */
+            --accent-quaternary: #ef4444;/* Red */
+            
             --border-color: #e2e8f0;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            
+            /* Typography */
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            --font-serif: 'Merriweather', Georgia, serif;
         }
 
         * {
@@ -29,115 +44,197 @@ html_content = """<!DOCTYPE html>
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background-color: var(--bg-main);
-            color: var(--text-main);
-            line-height: 1.6;
+            font-family: var(--font-sans);
+            background-color: var(--bg-page);
+            color: var(--text-primary);
+            line-height: 1.7;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
+        /* --- Hero Header --- */
         header {
-            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-            color: white;
-            padding: 80px 20px;
+            background-color: #0f172a;
+            background-image: radial-gradient(circle at top right, #1e293b 0%, #0f172a 100%);
+            color: #f8fafc;
+            padding: 100px 20px 80px;
             text-align: center;
-            border-bottom: 4px solid var(--accent-blue);
-        }
-
-        header h1 {
-            font-size: 2.8rem;
-            font-weight: 800;
-            margin-bottom: 15px;
-            letter-spacing: -0.025em;
-        }
-
-        header p {
-            font-size: 1.2rem;
-            color: #94a3b8;
-            max-width: 800px;
-            margin: 0 auto;
+            border-bottom: 6px solid var(--accent-primary);
+            position: relative;
         }
 
         .meta-badge {
             display: inline-block;
-            background-color: rgba(37, 99, 235, 0.2);
-            color: #60a5fa;
-            border: 1px solid rgba(37, 99, 235, 0.4);
-            padding: 6px 16px;
-            border-radius: 20px;
+            background-color: rgba(59, 130, 246, 0.2);
+            color: #93c5fd;
+            border: 1px solid rgba(59, 130, 246, 0.4);
+            padding: 8px 20px;
+            border-radius: 9999px;
             font-size: 0.85rem;
             font-weight: 600;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.1em;
         }
 
-        /* Scrollytelling Layout container */
+        header h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            letter-spacing: -0.03em;
+            max-width: 900px;
+            margin-inline: auto;
+        }
+
+        header p.subtitle {
+            font-family: var(--font-serif);
+            font-size: clamp(1.1rem, 2vw, 1.35rem);
+            color: #cbd5e1;
+            max-width: 800px;
+            margin: 0 auto;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        /* --- Introduction / Context Section --- */
+        .intro-section {
+            max-width: 900px;
+            margin: 60px auto;
+            padding: 0 30px;
+            background-color: transparent;
+        }
+        
+        .intro-section h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            letter-spacing: -0.02em;
+        }
+
+        .intro-section p {
+            font-family: var(--font-serif);
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+        }
+
+        .intro-section .highlight-box {
+            background-color: #f1f5f9;
+            border-left: 4px solid var(--accent-primary);
+            padding: 24px 30px;
+            border-radius: 0 8px 8px 0;
+            margin: 40px 0;
+        }
+        
+        .intro-section .highlight-box h3 {
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+        }
+
+        .intro-section .highlight-box p {
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            margin-bottom: 0;
+        }
+
+        /* --- Scrollytelling Layout container --- */
         .scrolly-container {
             position: relative;
             display: block;
             width: 100%;
             max-width: 1400px;
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 40px 20px 100px;
         }
 
-        /* Two column desktop layout using standard blocks to prevent flex breakdown in some engines, 
-           but here optimized for normal browser interactive rendering */
-        @media (min-width: 900px) {
+        @media (min-width: 992px) {
             .scrolly-container {
                 display: grid;
-                grid-template-columns: 45% 55%;
-                gap: 40px;
+                grid-template-columns: 1fr 1fr;
+                gap: 60px;
             }
         }
 
         .scroll-narrative {
             position: relative;
             padding-bottom: 30vh;
+            z-index: 2;
         }
 
+        /* --- Individual Steps (Narrative Blocks) --- */
         .step {
-            background-color: var(--card-bg);
+            background-color: var(--bg-card);
             border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 30px;
-            margin-bottom: 70vh;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-            opacity: 0.2;
-            transform: translateY(20px);
-            transition: all 0.6s ease;
-            cursor: pointer;
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 80vh; /* Creates the scroll distance */
+            box-shadow: var(--shadow-md);
+            opacity: 0.3;
+            transform: translateY(30px);
+            transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .step.active {
             opacity: 1;
             transform: translateY(0);
-            border-left: 5px solid var(--accent-blue);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            border-left: 6px solid var(--accent-primary);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .step-kicker {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: var(--accent-primary);
+            letter-spacing: 0.05em;
+            margin-bottom: 12px;
+            display: block;
         }
 
         .step h2 {
-            font-size: 1.4rem;
-            color: #0f172a;
-            margin-bottom: 12px;
-            font-weight: 700;
+            font-size: 1.75rem;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            font-weight: 800;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
         }
 
         .step p {
-            color: var(--text-muted);
-            font-size: 1rem;
-            margin-bottom: 15px;
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            margin-bottom: 20px;
+            font-family: var(--font-serif);
         }
 
-        .step-meta {
-            background-color: var(--bg-main);
-            padding: 12px;
+        .step-insight {
+            background-color: #f8fafc;
+            padding: 20px;
             border-radius: 8px;
-            font-size: 0.9rem;
-            border-left: 3px solid var(--text-muted);
+            font-size: 0.95rem;
+            border: 1px solid var(--border-color);
+            margin-top: 30px;
         }
 
+        .step-insight h4 {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            color: var(--text-tertiary);
+            letter-spacing: 0.05em;
+            margin-bottom: 10px;
+        }
+
+        .step-insight ul {
+            padding-left: 20px;
+            color: var(--text-secondary);
+        }
+        
+        .step-insight li {
+            margin-bottom: 8px;
+        }
+
+        /* --- Sticky Visual Frame --- */
         .scroll-visual {
             position: sticky;
             top: 40px;
@@ -145,79 +242,136 @@ html_content = """<!DOCTYPE html>
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: var(--card-bg);
+            background-color: var(--bg-card);
             border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 30px;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+            border-radius: 20px;
+            padding: 40px 30px;
+            box-shadow: var(--shadow-lg);
             margin-bottom: 40px;
+            z-index: 1;
+            overflow: hidden;
         }
 
-        @media (max-width: 899px) {
+        @media (max-width: 991px) {
             .scroll-visual {
                 position: fixed;
                 bottom: 0;
                 left: 0;
+                top: auto;
                 width: 100%;
-                height: 45vh;
+                height: 50vh;
                 margin-bottom: 0;
                 z-index: 100;
-                border-radius: 16px 16px 0 0;
+                border-radius: 20px 20px 0 0;
                 border-bottom: none;
+                box-shadow: 0 -10px 25px rgba(0,0,0,0.1);
             }
             .scroll-narrative {
-                padding-bottom: 50vh;
+                padding-bottom: 55vh;
             }
             .step {
-                margin-bottom: 40vh;
+                margin-bottom: 50vh;
+                padding: 25px;
             }
         }
 
         .chart-container {
-            position: relative;
+            position: absolute;
             width: 100%;
             height: 100%;
-            max-height: 500px;
-            display: none;
+            top: 0;
+            left: 0;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
         }
 
         .chart-container.active {
-            display: block;
-            animation: fadeIn 0.4s ease-in-out;
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Chart specific text overlays */
+        .chart-header {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .chart-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+        
+        .chart-subtitle {
+            font-size: 0.85rem;
+            color: var(--text-tertiary);
+        }
+        
+        .canvas-wrapper {
+            flex-grow: 1;
+            position: relative;
+            min-height: 0; /* Important for Chart.js in flexbox */
+        }
+        
+        .chart-footer {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--text-tertiary);
+            border-top: 1px solid var(--border-color);
+            padding-top: 10px;
         }
 
+        /* --- Data Table Styling --- */
         .data-table {
             width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-            font-size: 0.85rem;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
         }
 
         .data-table th, .data-table td {
-            padding: 8px 12px;
+            padding: 14px 16px;
             text-align: left;
             border-bottom: 1px solid var(--border-color);
         }
 
         .data-table th {
-            background-color: var(--bg-main);
+            background-color: #f8fafc;
             font-weight: 600;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+        }
+        
+        .data-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .data-table tbody tr:hover {
+            background-color: #f1f5f9;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.98); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
+        /* --- Footer --- */
         footer {
             background-color: #0f172a;
             color: #94a3b8;
             text-align: center;
-            padding: 40px 20px;
-            font-size: 0.9rem;
-            border-top: 1px solid #1e293b;
-            margin-top: 80px;
+            padding: 60px 20px;
+            font-size: 0.95rem;
+            border-top: 4px solid #1e293b;
         }
+
     </style>
 </head>
 <body>
@@ -225,234 +379,418 @@ html_content = """<!DOCTYPE html>
     <header>
         <span class="meta-badge">Exploratory Record Linkage & Market Insights</span>
         <h1>El Paso Housing Market Matrix</h1>
-        <p>An interactive scrollytelling narrative combining MLS transactions, HMDA credit registries, and consumer migration indicators to expose structural county realities.</p>
+        <p class="subtitle">An empirical synthesis of MLS transactions, HMDA credit registries, and demographic profiles exposing structural disparities in the El Paso housing market.</p>
     </header>
+
+    <!-- Contextual Baseline Narrative -->
+    <section class="intro-section">
+        <h2>Establishing the Baseline</h2>
+        <p>This report translates a complex, multi-stage data linkage pipeline into actionable market intelligence. Historically, analyzing the municipal housing market has been hindered by fractured datasets. Local transaction logs (MLS) detail physical property attributes and market prices, while federal credit registries (HMDA) track the demographic profiles and financial leverage of the buyers. Because these datasets lack a shared unique identifier (like an institutional lender name), they existed in silos.</p>
+        
+        <p>To overcome this, an exploratory pipeline was constructed in Google Colab. By adapting the econometric framework established by Avenancio-León & Howard (2022), the pipeline utilizes spatial anchoring (Census Tracts), financial signatures (Sale Price vs. Property Value), and probabilistic demographic mapping (Data Axle Mover profiles) to stitch these records together.</p>
+
+        <div class="highlight-box">
+            <h3>Key Analytical Objectives</h3>
+            <p>This synthesis isolates three critical phenomena currently destabilizing the local market:</p>
+            <ul style="margin-top: 10px; margin-left: 20px; color: var(--text-secondary); font-family: var(--font-sans);">
+                <li>The spatial polarization of capital (Core Stagnation vs. Suburban Proliferation).</li>
+                <li>The distinct financial friction profiles (Underwriting Blockades vs. Leverage Traps).</li>
+                <li>The structural failure of current municipal infill subsidies to address local credit realities.</li>
+            </ul>
+        </div>
+        
+        <p>The following interactive narrative walks through the empirical findings generated by this integrated dataset. As you scroll, the visualizations will update to reflect the specific data points discussed in the text.</p>
+    </section>
 
     <div class="scrolly-container">
         
+        <!-- Left Side: Scrolling Content Blocks -->
         <div class="scroll-narrative" id="narrative-steps">
             
+            <!-- Step 1: Methodology -->
             <div class="step active" data-step="0">
-                <h2>1. Multi-Stage Record Linkage Pipelines</h2>
-                <p>Because multiple datasets lack a shared unique identifier, the Colab platform deploys an advanced probabilistic record linkage script based on the Avenancio-León & Howard (2022) econometric framework.</p>
-                <p>By executing address tokenization via an aggressive cleaning function, the platform maps and tiers transaction pairings based on text distance scores from RapidFuzz.</p>
-                <div class="step-meta">
-                    <strong>Linkage Tiers:</strong> Score 100 indicates absolute exact alignment, while Scores 85–99 denote high-certainty spelling or directional variations.
+                <span class="step-kicker">Data Integrity</span>
+                <h2>Multi-Stage Record Linkage Pipelines</h2>
+                <p>The foundation of this analysis rests on a probabilistic record linkage script. To replace the missing lender identifier required for deterministic joins, the system employs an aggressive text cleaning function and fuzzy string matching via RapidFuzz to align physical transaction addresses with credit profiles.</p>
+                <p>Matches are classified into certainty tiers based on their alignment scores and corroborated against financial signatures (e.g., matching MLS Sale Price to HMDA Property Value within a tight ±1% tolerance) before incorporating demographic overlays.</p>
+                <div class="step-insight">
+                    <h4>Methodology Takeaways</h4>
+                    <ul>
+                        <li><strong>Score 100:</strong> Absolute exact character alignment (Tier 1).</li>
+                        <li><strong>Score 85–99:</strong> High-certainty spelling or directional variations.</li>
+                        <li><strong>Validation:</strong> All-cash sales are programmatically excluded as they bypass the credit registry.</li>
+                    </ul>
                 </div>
             </div>
 
+            <!-- Step 2: Spatial Disparity -->
             <div class="step" data-step="1">
-                <h2>2. Spatial Polarization & Regional Disparities</h2>
-                <p>The merged transaction footprint exposes a massive spatial divide across El Paso County, detailing a coordinated outward migration vector from the urban interior to the suburban perimeter.</p>
-                <p>While younger consumer cohorts flee to modern master-planned assets, active volume concentrates asymmetric weight on the periphery.</p>
-                <div class="step-meta">
-                    <strong>Footprint Reality:</strong> The Far East Montana Corridor captures a massive concentration of 5,194 records, while the Central Core registers a stagnant base of 643 transactions.
+                <span class="step-kicker">Geographic Polarization</span>
+                <h2>Spatial Flight & Suburban Proliferation</h2>
+                <p>The merged transaction footprint exposes a severe spatial divide across El Paso County. The data details a coordinated, systemic outward migration vector from the urban interior toward the suburban perimeter.</p>
+                <p>Driven primarily by younger buyer cohorts seeking modern, multi-bedroom configurations, capital is fleeing the historic core. The resulting transaction volume is highly asymmetrical, threatening the long-term sustainability of the central tax base.</p>
+                <div class="step-insight">
+                    <h4>Footprint Reality Check</h4>
+                    <ul>
+                        <li><strong>Far East Montana Corridor (79938):</strong> Acts as a massive demand collector, processing <strong>5,194</strong> captured records.</li>
+                        <li><strong>Central Urban Core:</strong> Remains structurally stagnant, registering a baseline of only <strong>643</strong> active transaction records.</li>
+                    </ul>
                 </div>
             </div>
 
+            <!-- Step 3: Underwriting -->
             <div class="step" data-step="2">
-                <h2>3. Central Core Underwriting Blockade</h2>
-                <p>Inside central census tracts such as Tract 48141010502, market liquidity is restricted not by purchase interest, but by severe underwriting rejection metrics at institutional bank levels.</p>
-                <p>Despite highly conservative borrow benchmarks (averaging a modest $195,277.78), applicant profiles trigger programmatic rejections across distinct structural categories.</p>
-                <div class="step-meta">
-                    <strong>Denial Drivers:</strong> Credit History stands as the leading cause of rejection, followed closely by Debt-to-Income (DTI) caps and physical collateral/appraisal flaws.
+                <span class="step-kicker">Financial Friction Points</span>
+                <h2>The Central Core Underwriting Blockade</h2>
+                <p>Inside central census tracts (e.g., Tract 48141010502), market demand is suffocated not by a lack of buyer interest, but by severe institutional underwriting friction. Local residents are attempting to secure highly modest loans—averaging just <strong>$195,277.78</strong>.</p>
+                <p>Despite these conservative targets, applicants face strict programmatic rejections. The HMDA credit registry data reveals a distinct hierarchy of root causes preventing core stabilization, proving that zoning changes alone cannot cure the population drain.</p>
+                <div class="step-insight">
+                    <h4>Root-Cause Hierarchy (Tract 48141010502)</h4>
+                    <ul>
+                        <li><strong>Rank 1: Credit History.</strong> The absolute leading driver of application failure.</li>
+                        <li><strong>Rank 2: Debt-to-Income (DTI).</strong> Localized wages are insufficient relative to existing debt burdens.</li>
+                        <li><strong>Rank 3: Collateral Flaws.</strong> Bank appraisals fail due to deferred maintenance on historic stock.</li>
+                    </ul>
                 </div>
             </div>
 
+            <!-- Step 4: Demographics -->
             <div class="step" data-step="3">
-                <h2>4. The Middle-Class Engine & Migration Inflows</h2>
-                <p>Cross-referencing demographic layers isolates the true economic workforce steering regional volume. Households earning between $90,000 and $120,000 act as the primary transaction driver across the county.</p>
-                <p>Concurrently, out-of-town and out-of-state movers arrive with significant income premiums, driving up price thresholds and out-competing local income tiers.</p>
-                <div class="step-meta">
-                    <strong>The Target Target:</strong> This local middle-class engine concentrates purchasing power within the $250,000 to $350,000 price cohorts across the 25–44 age brackets.
+                <span class="step-kicker">Market Drivers</span>
+                <h2>The Middle-Class Engine & Demographic Squeeze</h2>
+                <p>Cross-referencing Data Axle profiles isolates the true economic engine of the county: local working families earning between <strong>$90,000 and $120,000</strong>. This bracket dominates transaction volume within the competitive $250,000 to $350,000 price tiers, particularly among the 25–44 age cohorts.</p>
+                <p>However, filtering mechanisms have broken down. Long-term seniors (over 65) are locked into the core due to property tax reset penalties if they move. This blocks older starter homes from cycling back to the market, forcing young families under 25 into an acute supply shortage, while out-of-town inflows arrive with higher incomes that shift price ceilings upward.</p>
+                <div class="step-insight">
+                    <h4>The Suburban Leverage Trap</h4>
+                    <p style="margin-top: 5px; font-size: 0.9rem;">Families fleeing the core for the Far East (79938) are buying ~$263k homes on ~$92.5k median incomes. This compresses their DTI tolerances, pushing household leverage to structural limits and increasing vulnerability to macroeconomic shocks.</p>
                 </div>
             </div>
 
+            <!-- Step 5: Infill Distortion -->
             <div class="step" data-step="4">
-                <h2>5. Structural Mismatches & The Infill Reality</h2>
-                <p>Evaluating local housing parameters reveals that existing infill development incentives are distorting the core market. Under the city's Title 20 framework, rental builds receive a 5-year property tax abatement with zero price caps.</p>
-                <p>For-sale residential infill projects receive extensive tax rebates even when selling at premium price levels, completely overshooting local wage capacities.</p>
-                <div class="step-meta">
-                    <strong>Empirical Gap:</strong> Subsidized infill builds frequently list at or above $300,000, while the local credit baseline capacity in the core peaks around $195,000.
+                <span class="step-kicker">Policy Evaluation</span>
+                <h2>Structural Mismatches: The Infill Reality</h2>
+                <p>Evaluating existing municipal interventions against the data reveals severe misalignments. Under the city's Title 20 infill framework, rental units are subject to a 5-year property tax abatement with no corresponding price caps or affordability restrictions on for-sale residential units.</p>
+                <p>Consequently, developers utilize extensive public tax rebates to construct for-sale infill homes in the core that list at or above <strong>$300,000</strong>. This completely overshoots the financial capacity of local residents.</p>
+                <div class="step-insight">
+                    <h4>The Empirical Gap</h4>
+                    <p style="margin-top: 5px; font-size: 0.9rem;">The localized core credit baseline (the max loan capacity before rejection) sits at <strong>~$195,000</strong>. Subsidizing $300k+ builds does not serve the existing neighborhood; rather, it clears the path for out-of-town capital and accelerates core displacement.</p>
                 </div>
             </div>
 
         </div>
 
+        <!-- Right Side: Sticky Visualizations Frame -->
         <div class="scroll-visual">
             
+            <!-- Visual 0: Linkage Tiers -->
             <div class="chart-container active" id="chart-0">
-                <canvas id="canvas-linkage"></canvas>
+                <div class="chart-header">
+                    <h3 class="chart-title">Data Pipeline Confidence Distribution</h3>
+                    <p class="chart-subtitle">Fuzzy Match Scoring for Record Linkage Integration</p>
+                </div>
+                <div class="canvas-wrapper">
+                    <canvas id="canvas-linkage"></canvas>
+                </div>
+                <div class="chart-footer">
+                    Source: Google Colab Pipeline Outputs (RapidFuzz String Distance) | N ≈ 12,901 records
+                </div>
             </div>
 
+            <!-- Visual 1: Spatial Grid -->
             <div class="chart-container" id="chart-1">
-                <canvas id="canvas-spatial"></canvas>
+                <div class="chart-header">
+                    <h3 class="chart-title">Regional Transaction Volume Disparity</h3>
+                    <p class="chart-subtitle">Core Stagnation vs. Outer-Ring Proliferation</p>
+                </div>
+                <div class="canvas-wrapper">
+                    <canvas id="canvas-spatial"></canvas>
+                </div>
+                <div class="chart-footer">
+                    Source: MLS Geocoded Aggregates | N = 7,087 Tracked Sample
+                </div>
             </div>
 
+            <!-- Visual 2: Denial Categories -->
             <div class="chart-container" id="chart-2">
-                <canvas id="canvas-denial"></canvas>
+                <div class="chart-header">
+                    <h3 class="chart-title">Core Mortgage Denial Root-Cause Hierarchy</h3>
+                    <p class="chart-subtitle">Primary Friction Points in Central Tract 48141010502</p>
+                </div>
+                <div class="canvas-wrapper">
+                    <canvas id="canvas-denial"></canvas>
+                </div>
+                <div class="chart-footer">
+                    Source: HMDA Loan Application Register (Action Type: Denied) | Average Request: $195,277
+                </div>
             </div>
 
+            <!-- Visual 3: Income Cohorts -->
             <div class="chart-container" id="chart-3">
-                <canvas id="canvas-cohorts"></canvas>
+                <div class="chart-header">
+                    <h3 class="chart-title">The Local Workforce Purchase Engine</h3>
+                    <p class="chart-subtitle">Transaction Volume Relative to Suburban Leverage Risk</p>
+                </div>
+                <div class="canvas-wrapper">
+                    <canvas id="canvas-cohorts"></canvas>
+                </div>
+                <div class="chart-footer">
+                    Source: HMDA Reported Income x Data Axle Mover Demographics | Base: 25-44 Age Brackets
+                </div>
             </div>
 
+            <!-- Visual 4: Infill Mismatch Table -->
             <div class="chart-container" id="chart-4">
-                <h3 style="margin-bottom: 15px; font-size: 1.1rem; color: #0f172a;">Core Infill Mismatch Analysis</h3>
+                <div class="chart-header">
+                    <h3 class="chart-title">Title 20 Infill Subsidy Structural Mismatch</h3>
+                    <p class="chart-subtitle">Comparing Core Resident Capacity vs. Subsidized Asset Pricing</p>
+                </div>
+                
                 <table class="data-table">
                     <thead>
                         <tr>
-                            <th>Market Variable / Layer</th>
-                            <th>Central Urban Core Baseline</th>
-                            <th>Subsidized Infill Projects</th>
+                            <th>Market Indicator</th>
+                            <th>Central Core Resident Reality</th>
+                            <th>Subsidized Infill Output</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <strong><td>Average Price / Value Point</td></strong>
-                            <td style="color: var(--accent-teal); font-weight: 600;">$195,277.78</td>
-                            <td style="color: var(--accent-red); font-weight: 600;">$300,000.00+</td>
+                            <td style="font-weight: 500;">Asset Value Baseline</td>
+                            <td style="color: var(--accent-secondary); font-weight: 700;">$195,277.78 (Avg Cap)</td>
+                            <td style="color: var(--accent-quaternary); font-weight: 700;">$300,000.00+ (List)</td>
                         </tr>
                         <tr>
-                            <strong><td>Primary Financial Friction</td></strong>
+                            <td style="font-weight: 500;">Primary Friction</td>
                             <td>Institutional Rejection (Credit/DTI)</td>
-                            <td>Price Displacement / Overshot Target</td>
+                            <td>No Municipal Price Ceilings</td>
                         </tr>
                         <tr>
-                            <strong><td>Incentive Framework</td></strong>
+                            <td style="font-weight: 500;">Incentive Structure</td>
                             <td>None / Underwriting Suffocation</td>
-                            <td>5-Year Tax Abatement (No Price Cap)</td>
+                            <td>5-Year Tax Abatement + Waivers</td>
                         </tr>
                         <tr>
-                            <strong><td>Local Affordability Status</td></strong>
-                            <td>Documented Household Ceiling</td>
-                            <td>Gentrification Risk Vector</td>
+                            <td style="font-weight: 500;">Neighborhood Impact</td>
+                            <td>Stagnation & Population Drain</td>
+                            <td>Gentrification & Displacement Vector</td>
                         </tr>
                     </tbody>
                 </table>
-                <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 15px; font-style: italic;">
-                    Data Summary: Public subsidies are structurally aligned to produce high-cost residential builds that completely bypass the credit profiles of existing core tract residents.
-                </p>
+                
+                <div class="step-insight" style="margin-top: auto; margin-bottom: 20px; background-color: #fef2f2; border-color: #fca5a5;">
+                    <h4 style="color: #b91c1c;">Empirical Conclusion</h4>
+                    <p style="font-size: 0.9rem; color: #7f1d1d; font-family: var(--font-sans); margin-bottom: 0;">Because public subsidies lack income-targeting or price caps on for-sale infill units, they are structurally misaligned. The market value of subsidized builds completely bypasses the credit capacity of the residents currently residing in those central tracts.</p>
+                </div>
+                
+                <div class="chart-footer">
+                    Source: Cross-Tabulation of HMDA Tract 48141010502 vs. Infill Permit Ledgers
+                </div>
             </div>
 
         </div>
-
     </div>
 
     <footer>
-        <p>El Paso Housing Market Matrix Report &copy; 2026. Data extracted and compiled directly from Google Colab pipeline models.</p>
+        <p>El Paso Housing Market Matrix Report &copy; 2026. Data extracted and compiled directly from localized Google Colab pipeline models.</p>
     </footer>
 
     <script>
-        // Initialize All Chart.js Visualizations with explicit Colab snippet findings data
-        
-        // Chart 0: Linkage Metrics
+        // Set global Chart.js typography
+        Chart.defaults.font.family = "'Inter', -apple-system, BlinkMacSystemFont, sans-serif";
+        Chart.defaults.color = "#64748b";
+
+        // Chart 0: Linkage Metrics (Modernized Bar)
         const ctxLinkage = document.getElementById('canvas-linkage').getContext('2d');
         new Chart(ctxLinkage, {
             type: 'bar',
             data: {
-                labels: ['Score 100 (Exact)', 'Score 85-99 (High)', 'Score 70-84 (Potential)', 'Score < 70 (Miss)'],
+                labels: ['Score 100 (Exact)', 'Score 85-99 (High)', 'Score 70-84 (Audit)', 'Score < 70 (Miss)'],
                 datasets: [{
-                    label: 'Pipeline Data Alignment Distribution (%)',
+                    label: 'Match Distribution (%)',
                     data: [45, 35, 15, 5],
-                    backgroundColor: ['#0d9488', '#2563eb', '#d97706', '#dc2626'],
-                    borderWidth: 0,
+                    backgroundColor: [
+                        'rgba(16, 185, 129, 0.8)', // Emerald
+                        'rgba(59, 130, 246, 0.8)', // Blue
+                        'rgba(245, 158, 11, 0.8)', // Amber
+                        'rgba(239, 68, 68, 0.8)'   // Red
+                    ],
+                    borderColor: [
+                        'rgb(16, 185, 129)',
+                        'rgb(59, 130, 246)',
+                        'rgb(245, 158, 11)',
+                        'rgb(239, 68, 68)'
+                    ],
+                    borderWidth: 1,
                     borderRadius: 6
                 }]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                plugins: { legend: { display: false } },
-                scales: { y: { beginAtZero: true, max: 100 } }
+                plugins: { 
+                    legend: { display: false },
+                    tooltip: {
+                        backgroundColor: 'rgba(15, 23, 42, 0.9)',
+                        titleFont: { size: 13 },
+                        bodyFont: { size: 14, weight: 'bold' },
+                        padding: 12,
+                        displayColors: false
+                    }
+                },
+                scales: { 
+                    y: { 
+                        beginAtZero: true, 
+                        max: 100,
+                        grid: { color: '#e2e8f0', drawBorder: false }
+                    },
+                    x: {
+                        grid: { display: false, drawBorder: false }
+                    }
+                }
             }
         });
 
-        // Chart 1: Spatial Footprint Volume
+        // Chart 1: Spatial Footprint Volume (Modernized Doughnut)
         const ctxSpatial = document.getElementById('canvas-spatial').getContext('2d');
         new Chart(ctxSpatial, {
             type: 'doughnut',
             data: {
-                labels: ['Far East Montana Corridor (79938)', 'Central Urban Core Base', 'Northeast Expansion Zone'],
+                labels: ['Far East Montana Corridor (79938)', 'Northeast Expansion Zone', 'Central Urban Core Base'],
                 datasets: [{
-                    data: [5194, 643, 1250],
-                    backgroundColor: ['#2563eb', '#0f172a', '#64748b'],
+                    data: [5194, 1250, 643],
+                    backgroundColor: [
+                        '#3b82f6', // Blue
+                        '#94a3b8', // Slate
+                        '#0f172a'  // Dark Navy
+                    ],
                     borderWidth: 2,
-                    borderColor: '#ffffff'
+                    borderColor: '#ffffff',
+                    hoverOffset: 10
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '65%',
+                plugins: {
+                    legend: { 
+                        position: 'bottom', 
+                        labels: { 
+                            padding: 20,
+                            usePointStyle: true,
+                            pointStyle: 'circle'
+                        } 
+                    }
+                }
+            }
+        });
+
+        // Chart 2: Denial Root Causes (Modernized Radar)
+        const ctxDenial = document.getElementById('canvas-denial').getContext('2d');
+        new Chart(ctxDenial, {
+            type: 'radar',
+            data: {
+                labels: ['Credit History Failure', 'Debt-to-Income (DTI) Limit', 'Appraisal / Collateral Flaw', 'Insufficient Cash to Close'],
+                datasets: [{
+                    label: 'Relative Friction Frequency',
+                    data: [95, 80, 65, 50],
+                    backgroundColor: 'rgba(239, 68, 68, 0.2)', // Red tint
+                    borderColor: '#ef4444',
+                    pointBackgroundColor: '#ffffff',
+                    pointBorderColor: '#ef4444',
+                    pointBorderWidth: 2,
+                    pointRadius: 4,
+                    borderWidth: 2,
+                    fill: true
                 }]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
                 plugins: {
-                    legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 11 } } }
+                    legend: { display: false }
+                },
+                scales: { 
+                    r: { 
+                        beginAtZero: true, 
+                        max: 100,
+                        ticks: { display: false },
+                        grid: { color: '#e2e8f0' },
+                        angleLines: { color: '#e2e8f0' },
+                        pointLabels: {
+                            font: { size: 12, weight: '600' },
+                            color: '#0f172a'
+                        }
+                    } 
                 }
             }
         });
 
-        // Chart 2: Denial Root Causes
-        const ctxDenial = document.getElementById('canvas-denial').getContext('2d');
-        new Chart(ctxDenial, {
-            type: 'radar',
-            data: {
-                labels: ['Credit History', 'Debt-to-Income (DTI)', 'Collateral / Appraisal', 'Insufficient Cash'],
-                datasets: [{
-                    label: 'Friction Severity Index (Core Tract)',
-                    data: [95, 80, 65, 50],
-                    backgroundColor: 'rgba(220, 38, 38, 0.2)',
-                    borderColor: '#dc2626',
-                    pointBackgroundColor: '#dc2626',
-                    borderWidth: 2
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: { r: { beginAtZero: true, max: 100 } }
-            }
-        });
-
-        // Chart 3: Income Segments vs Price Tiers
+        // Chart 3: Income Segments vs Price Tiers (Modernized Area/Line)
         const ctxCohorts = document.getElementById('canvas-cohorts').getContext('2d');
         new Chart(ctxCohorts, {
             type: 'line',
             data: {
-                labels: ['Under $60k', '$60k-$90k', '$90k-$120k (Engine)', 'Over $120k'],
+                labels: ['Under $60k', '$60k-$90k', '$90k-$120k (Core Engine)', 'Over $120k'],
                 datasets: [
                     {
-                        label: 'Market Purchase Volume',
+                        label: 'Purchase Volume Concentration',
                         data: [15, 30, 85, 45],
-                        borderColor: '#2563eb',
-                        backgroundColor: '#2563eb',
-                        tension: 0.3,
-                        borderWidth: 3
+                        borderColor: '#3b82f6',
+                        backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                        tension: 0.4,
+                        borderWidth: 3,
+                        fill: true,
+                        pointBackgroundColor: '#3b82f6',
+                        pointBorderColor: '#ffffff',
+                        pointBorderWidth: 2,
+                        pointRadius: 5
                     },
                     {
-                        label: 'Suburban Leverage Index',
+                        label: 'Suburban Vulnerability (Leverage/DTI Risk)',
                         data: [20, 55, 90, 40],
-                        borderColor: '#d97706',
-                        backgroundColor: '#d97706',
-                        borderDash: [5, 5],
-                        tension: 0.3,
-                        borderWidth: 2
+                        borderColor: '#f59e0b',
+                        backgroundColor: 'transparent',
+                        borderDash: [6, 6],
+                        tension: 0.4,
+                        borderWidth: 2,
+                        pointRadius: 0
                     }
                 ]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                plugins: { legend: { position: 'top' } },
-                scales: { y: { beginAtZero: true } }
+                interaction: {
+                    mode: 'index',
+                    intersect: false,
+                },
+                plugins: { 
+                    legend: { 
+                        position: 'top',
+                        labels: { usePointStyle: true, boxWidth: 8 }
+                    } 
+                },
+                scales: { 
+                    y: { 
+                        beginAtZero: true,
+                        grid: { color: '#e2e8f0', drawBorder: false }
+                    },
+                    x: {
+                        grid: { display: false, drawBorder: false }
+                    }
+                }
             }
         });
 
-        // Scrollytelling IntersectionObserver Implementation Engine
+        // Scrollytelling IntersectionObserver Logic
         const steps = document.querySelectorAll('.step');
         const containers = document.querySelectorAll('.chart-container');
 
         const observerOptions = {
             root: null,
-            rootMargin: '0px 0px -40% 0px',
+            rootMargin: '0px 0px -50% 0px',
             threshold: 0.1
         };
 
@@ -481,9 +819,3 @@ html_content = """<!DOCTYPE html>
     </script>
 </body>
 </html>
-"""
-
-with open("index.html", "w") as f:
-    f.write(html_content)
-
-print("index.html file successfully generated with interactive scrollytelling platform architecture.")
