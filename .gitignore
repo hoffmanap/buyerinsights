@@ -1,0 +1,46 @@
+# =========================================================================
+# Git Ignore Configuration: El Paso Housing Data Integration Pipeline
+# =========================================================================
+
+# --- Large Raw Data Files (Excluding from Version Control) ---
+*.csv
+*.xlsx
+*.xls
+*.json
+*.parquet
+*.pkl
+*.pickle
+
+# --- Specific Known Analytical Files ---
+Data Axle Mover.csv
+LAR Data 2024.xlsx
+LAR Data 2025.xlsx
+Master_Combined_Housing_Data.csv
+
+# --- Python & Google Colab Specifics ---
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.ipynb_checkpoints/
+.virtualenv/
+env/
+venv/
+ENV/
+
+# --- Operating System Noise ---
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+ehthumbs.db
+
+# --- Development / Editor Environments ---
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# --- Allowed Web Application Framework Elements ---
+!index.html
+!README.md
