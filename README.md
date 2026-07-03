@@ -2,6 +2,7 @@
 
 This documentation details the programmatic and econometric methodology used in the Google Colab environment to reconcile and integrate physical housing market records with federal credit registries. 
 
+## https://hoffmanap.github.io/buyerinsights/
 ---
 
 ## 1. Core Linkage Architectural Concept
