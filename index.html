@@ -3,14 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The El Paso Housing Matrix: A Comprehensive Empirical Narrative</title>
+    <title>The El Paso Housing Matrix: A Complete Empirical Narrative</title>
     
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&display=swap" rel="stylesheet">
     
-    <!-- Chart.js for interactive dashboard elements -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
     <style>
@@ -27,7 +25,6 @@
             --accent-quaternary: #ef4444;/* Red */
             --accent-emerald: #10b981;   /* Emerald */
             --accent-purple: #8b5cf6;    /* Purple */
-            --accent-slate: #475569;     /* Slate */
             
             --border-color: #e2e8f0;
             --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
@@ -40,113 +37,68 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
-            font-family: var(--font-sans);
-            background-color: var(--bg-page);
-            color: var(--text-primary);
-            line-height: 1.7;
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
+            font-family: var(--font-sans); background-color: var(--bg-page);
+            color: var(--text-primary); line-height: 1.7; overflow-x: hidden; -webkit-font-smoothing: antialiased;
         }
 
         /* --- Header & Intro --- */
         header {
-            background-color: #020617;
-            background-image: radial-gradient(circle at center 20%, #1e293b 0%, #020617 100%);
-            color: #f8fafc;
-            padding: 120px 20px 100px;
-            text-align: center;
-            border-bottom: 6px solid var(--accent-primary);
+            background-color: #020617; background-image: radial-gradient(circle at center 20%, #1e293b 0%, #020617 100%);
+            color: #f8fafc; padding: 120px 20px 100px; text-align: center; border-bottom: 6px solid var(--accent-primary);
         }
 
         .meta-badge {
-            display: inline-block;
-            background-color: rgba(37, 99, 235, 0.2);
-            color: #93c5fd;
-            border: 1px solid rgba(37, 99, 235, 0.4);
-            padding: 8px 20px;
-            border-radius: 9999px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            margin-bottom: 24px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
+            display: inline-block; background-color: rgba(37, 99, 235, 0.2); color: #93c5fd;
+            border: 1px solid rgba(37, 99, 235, 0.4); padding: 8px 20px; border-radius: 9999px;
+            font-size: 0.85rem; font-weight: 700; margin-bottom: 24px; text-transform: uppercase; letter-spacing: 0.1em;
         }
 
         header h1 {
-            font-size: clamp(2.5rem, 5vw, 4.5rem);
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 24px;
-            letter-spacing: -0.03em;
-            max-width: 1100px;
-            margin-inline: auto;
+            font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 800; line-height: 1.1; margin-bottom: 24px;
+            letter-spacing: -0.03em; max-width: 1100px; margin-inline: auto;
         }
 
         header p.subtitle {
-            font-family: var(--font-serif);
-            font-size: clamp(1.2rem, 2vw, 1.4rem);
-            color: #cbd5e1;
-            max-width: 900px;
-            margin: 0 auto;
-            font-weight: 300;
-            line-height: 1.6;
+            font-family: var(--font-serif); font-size: clamp(1.2rem, 2vw, 1.4rem); color: #cbd5e1;
+            max-width: 900px; margin: 0 auto; font-weight: 300; line-height: 1.6;
         }
 
-        .intro-section {
-            max-width: 900px;
-            margin: 80px auto 60px;
-            padding: 0 30px;
-        }
-        
+        .intro-section { max-width: 900px; margin: 80px auto 60px; padding: 0 30px; }
         .intro-section h2 { font-size: 2.2rem; font-weight: 800; margin-bottom: 24px; letter-spacing: -0.02em; }
         .intro-section p { font-family: var(--font-serif); font-size: 1.15rem; color: var(--text-secondary); margin-bottom: 24px; }
         
         .highlight-box {
-            background-color: #f1f5f9;
-            border-left: 4px solid var(--accent-primary);
-            padding: 24px 30px;
-            border-radius: 0 8px 8px 0;
-            margin: 40px 0;
+            background-color: #f1f5f9; border-left: 4px solid var(--accent-primary);
+            padding: 24px 30px; border-radius: 0 8px 8px 0; margin: 40px 0;
         }
 
         /* --- Scrollytelling Layout --- */
         .scrolly-container {
-            position: relative;
-            display: grid;
-            width: 100%;
-            max-width: 1600px;
-            margin: 0 auto;
-            padding: 40px 40px 100px;
+            position: relative; display: grid; width: 100%; max-width: 1600px; margin: 0 auto; padding: 40px 40px 100px;
         }
 
-        @media (min-width: 1100px) {
-            .scrolly-container { grid-template-columns: 45% 55%; gap: 60px; }
-        }
+        @media (min-width: 1100px) { .scrolly-container { grid-template-columns: 45% 55%; gap: 60px; } }
 
         .scroll-narrative { position: relative; padding-bottom: 30vh; z-index: 2; }
 
         .step {
-            background-color: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 40px;
-            margin-bottom: 85vh; 
-            box-shadow: var(--shadow-md);
-            opacity: 0.2;
-            transform: translateY(30px);
-            transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+            background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: 16px;
+            padding: 40px; margin-bottom: 85vh; box-shadow: var(--shadow-md);
+            opacity: 0.2; transform: translateY(30px); transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .step.active {
-            opacity: 1;
-            transform: translateY(0);
-            border-left: 6px solid var(--accent-primary);
-            box-shadow: var(--shadow-lg);
+            opacity: 1; transform: translateY(0); border-left: 6px solid var(--accent-primary); box-shadow: var(--shadow-lg);
         }
 
+        .step-number {
+            display: inline-block; background-color: var(--accent-primary); color: white; width: 32px; height: 32px;
+            text-align: center; line-height: 32px; border-radius: 50%; font-weight: 700; margin-bottom: 15px; font-size: 0.9rem;
+        }
+        
         .step-kicker {
             font-size: 0.9rem; text-transform: uppercase; font-weight: 800;
-            color: var(--accent-secondary); letter-spacing: 0.05em; margin-bottom: 15px; display: block;
+            color: var(--accent-secondary); letter-spacing: 0.05em; margin-bottom: 15px; margin-left: 10px; display: inline-block;
         }
 
         .step h2 { font-size: 1.8rem; color: var(--text-primary); margin-bottom: 20px; font-weight: 800; line-height: 1.25; letter-spacing: -0.02em; }
@@ -161,11 +113,9 @@
 
         /* --- Sticky Visual Frame --- */
         .scroll-visual {
-            position: sticky; top: 40px; height: calc(100vh - 80px);
-            display: flex; align-items: center; justify-content: center;
-            background-color: var(--bg-card); border: 1px solid var(--border-color);
-            border-radius: 20px; padding: 40px; box-shadow: var(--shadow-lg);
-            margin-bottom: 40px; z-index: 1; overflow: hidden;
+            position: sticky; top: 40px; height: calc(100vh - 80px); display: flex; align-items: center; justify-content: center;
+            background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: 20px; padding: 40px;
+            box-shadow: var(--shadow-lg); margin-bottom: 40px; z-index: 1; overflow: hidden;
         }
 
         @media (max-width: 1099px) {
@@ -200,112 +150,108 @@
 <body>
 
     <header>
-        <span class="meta-badge">Deep-Dive Empirical Syntheses</span>
+        <span class="meta-badge">Data-Driven Housing Syntheses</span>
         <h1>The El Paso Housing Matrix: A Complete Market Narrative</h1>
-        <p class="subtitle">A comprehensive spatial, financial, and demographic analysis of residential mobility, out-of-town capital flows, generational supply bottlenecks, and structural policy failures.</p>
+        <p class="subtitle">A deeply granular exploration of residential mobility, out-of-town capital flows, generational supply bottlenecks, and structural policy failures.</p>
     </header>
 
     <section class="intro-section">
         <h2>Unlocking the Black Box of Local Housing</h2>
         <p>To bypass the historical fragmentation of municipal housing data, this analysis utilizes a custom probabilistic data-linking pipeline built in Google Colab. By aggressively tokenizing physical addresses from the Multiple Listing Service (MLS), the pipeline matches property histories against federal Home Mortgage Disclosure Act (HMDA) credit registries and Data Axle Mover demographics.</p>
         
-        <p>The resulting integrated dataset reveals the intricate web between <strong>buyer profiles</strong> (Age, Income, Origin), <strong>asset characteristics</strong> (Price, Tract, Era), and <strong>structural financing</strong> (DTI limits, Rejections). This scrollytelling report outlines the full data story—from spatial flight to systemic underwriting blockades.</p>
+        <p>The resulting integrated dataset allows us to move beyond broad estimations. We can now observe the intricate web between <strong>buyer profiles</strong> (Age, Granular Income, Origin), <strong>asset characteristics</strong> (Price Tiers, Tract, Build Era), and <strong>structural financing</strong> (DTI limits, Leverage, Rejections). This scrollytelling report outlines the full 12-point empirical data story.</p>
 
         <div class="highlight-box">
             <h3 style="font-size: 1.2rem; margin-bottom: 10px; font-weight: 800;">Dataset Confidence Metrics</h3>
             <p style="font-family: var(--font-sans); font-size: 0.95rem; color: var(--text-secondary);">
-                The underlying sample links exactly <strong>12,901 unique records</strong> across the 2024–2025 timelines. The pipeline achieved a Tier 1 (100% exact match) on 45% of records, and a Tier 2 (85-99% fuzzy certainty) on an additional 35%, ensuring high statistical fidelity for the localized patterns below.
+                The underlying sample links exactly <strong>12,901 unique records</strong> across the 2024–2025 timelines. The pipeline achieved a Tier 1 (100% exact fuzzy match score) on 45% of records, and a Tier 2 (85-99% fuzzy certainty) on an additional 35%, ensuring high statistical fidelity for the localized patterns analyzed below.
             </p>
         </div>
     </section>
 
     <div class="scrolly-container">
         
-        <!-- Left Side Narrative Blocks -->
         <div class="scroll-narrative" id="narrative-steps">
             
-            <!-- Insight 1 -->
             <div class="step active" data-step="0">
-                <span class="step-kicker">Origin of Capital</span>
+                <span class="step-number">1</span><span class="step-kicker">Origin of Capital</span>
                 <h2>The Out-of-State Purchasing Premium</h2>
-                <p>Tracking the geographic origin of buyers exposes a severe localized affordability gap. When cross-referencing Data Axle profiles, three distinct migration flows emerge: Local Metro residents, Regional TX/NM inflows, and Out-of-State relocations.</p>
-                <p>Out-of-state buyers arrive with substantially higher median incomes, artificially inflating local purchasing power. This coastal capital influx consistently clears premium housing tiers without triggering financing stress, displacing local working families into highly compressed, hyper-competitive sub-markets.</p>
+                <p>Tracking the geographic origin of buyers exposes a severe baseline affordability gap. When cross-referencing Data Axle mover profiles, three distinct migration flows emerge: Local Metro residents, Regional TX/NM inflows, and Out-of-State relocations.</p>
+                <p>Out-of-state buyers arrive with substantially higher median incomes (~$168,000), artificially inflating local purchasing power. This coastal capital influx consistently clears premium housing tiers without triggering financing stress, displacing local working families.</p>
             </div>
 
-            <!-- Insight 2 -->
             <div class="step" data-step="1">
-                <span class="step-kicker">Market Sorting</span>
-                <h2>Price Share Segregation by Origin</h2>
-                <p>When analyzing the market through a clustered price-tier lens, a rigid segregation wall becomes visible. The market behaves as two completely disconnected economies.</p>
-                <p>Local El Paso residents overwhelmingly capture the sub-$300k housing supply. Conversely, out-of-state movers exercise near-total dominance in the $350k+ and $400k+ premium brackets. Imported capital is monopolizing the upper tranches of local inventory, accelerating local gentrification pressures.</p>
-                <div class="step-insight">
-                    <h4>The Clustering Effect</h4>
-                    <ul>
-                        <li><strong>Local Dominance:</strong> Locals account for 68% of the sub-$200k tier.</li>
-                        <li><strong>Premium Takeover:</strong> Out-of-state capital commands the $400k+ clusters.</li>
-                    </ul>
-                </div>
+                <span class="step-number">2</span><span class="step-kicker">Income Nuance</span>
+                <h2>Granular Income Distribution</h2>
+                <p>To understand the local market reality, we must break down the income brackets beyond broad generalizations. Slicing the data into $25,000 intervals reveals exactly where the bulk of El Paso’s active transaction volume lives.</p>
+                <p>The distribution represents a steep bell curve peaking directly in the <strong>$75k to $100k</strong> and <strong>$100k to $125k</strong> intervals. Very few local households earning under $50k are successfully closing on homes, while volume drops off sharply for locals earning over $150k.</p>
             </div>
 
-            <!-- Insight 3 -->
             <div class="step" data-step="2">
-                <span class="step-kicker">Local Engines</span>
-                <h2>The Middle-Class Volume Engine</h2>
-                <p>Despite the high-end distortion caused by out-of-town capital, the true backbone of El Paso transaction volume is generated by the local middle class—specifically, households earning between <strong>$90,000 and $120,000</strong>.</p>
-                <p>This demographic segment heavily concentrates its purchasing power in the <strong>$250,000 to $350,000</strong> asset range. They represent the active workforce that sustains suburban master-planned developments, but they are uniquely vulnerable to interest rate spikes and DTI limit compressions.</p>
+                <span class="step-kicker">Market Sorting</span><span class="step-number">3</span>
+                <h2>Granular Price Share Segregation</h2>
+                <p>When analyzing the market through a highly detailed $50k-increment price lens, a rigid segregation wall becomes visible. The market behaves as two completely disconnected economies.</p>
+                <p>Local El Paso residents overwhelmingly capture the sub-$250k and $250k-$300k housing supply. Conversely, out-of-state movers exercise dominant control as soon as properties cross the <strong>$350k threshold</strong>. Imported capital is monopolizing the upper tranches of local inventory, accelerating gentrification.</p>
             </div>
 
-            <!-- Insight 4 -->
             <div class="step" data-step="3">
-                <span class="step-kicker">Generational Squeeze</span>
-                <h2>The First-Time Homebuyer Crisis</h2>
-                <p>A deep dive into age demographics reveals extreme compression at the bottom of the market. Buyers under the age of 25 face a catastrophic lack of entry-level inventory. Historically, "starter homes" under $200k facilitated wealth building for this cohort.</p>
-                <p>Because the middle-class engine is being pushed downward by out-of-state wealth, local workforce buyers in their 30s are absorbing entry-level assets. This systemic crowding-out effect is pricing Gen Z entirely out of El Paso homeownership.</p>
+                <span class="step-number">4</span><span class="step-kicker">Local Engines</span>
+                <h2>The Middle-Class Volume Engine</h2>
+                <p>Synthesizing the granular income and price data reveals the true backbone of El Paso transaction volume. It is highly concentrated among households earning between <strong>$90,000 and $120,000</strong>.</p>
+                <p>This specific demographic segment overwhelmingly targets the <strong>$250k to $350k</strong> asset range. They represent the active workforce (primarily ages 25-44) that sustains suburban master-planned developments, but they are uniquely vulnerable to macroeconomic interest rate spikes.</p>
             </div>
 
-            <!-- Insight 5 -->
             <div class="step" data-step="4">
-                <span class="step-kicker">Spatial Mobility</span>
-                <h2>Core Flight & Housing Characteristics</h2>
-                <p>Where are these middle-class families going? Geocoding the origin and destination addresses of local movers exposes a massive structural shift from the urban interior to the suburban perimeter.</p>
-                <p>When comparing the characteristics of their previous homes (Origin) to their new homes (Destination), the motivation is clear: families are trading 1,200 sq.ft., pre-1970 builds in the core for 2,100+ sq.ft., multi-bedroom new constructions in specific expansion zip codes.</p>
+                <span class="step-number">5</span><span class="step-kicker">Generational Squeeze</span>
+                <h2>The First-Time Homebuyer Crisis</h2>
+                <p>A deep dive into age demographics reveals extreme compression at the bottom of the market. Buyers under the age of 25 face a catastrophic lack of entry-level inventory, accounting for less than 7% of successful mortgages.</p>
+                <p>Because the middle-class engine (ages 25-44) is being pushed downward by out-of-state wealth, those older cohorts are absorbing entry-level assets. This systemic crowding-out effect is pricing Gen Z entirely out of El Paso homeownership.</p>
             </div>
 
-            <!-- Insight 6 -->
             <div class="step" data-step="5">
-                <span class="step-kicker">Supply Blockades</span>
+                <span class="step-number">6</span><span class="step-kicker">Spatial Mobility</span>
+                <h2>Core Flight to the Perimeter</h2>
+                <p>Where are these middle-class families going? Geocoding the destination addresses of local movers exposes a massive structural shift from the urban interior to the suburban perimeter.</p>
+                <p>The Far East Montana Corridor (ZIP 79938) operates as a massive demand vacuum, capturing over 5,100 records. Meanwhile, the historic Central Core registered less than 650 active sales during the entire tracked period.</p>
+            </div>
+
+            <div class="step" data-step="6">
+                <span class="step-number">7</span><span class="step-kicker">Physical Assets</span>
+                <h2>The Property Characteristics Trade-Up</h2>
+                <p>By attaching Rentcast property history data to the Data Axle mover profiles, we can compare the exact physical characteristics of a local buyer's origin home vs. their destination home.</p>
+                <p>The motivation for the spatial flight is highly structural: families are trading 1,250 sq.ft., pre-1970 builds on small lots in the core for 2,150+ sq.ft., multi-bedroom new constructions in the suburbs. The core housing stock simply does not fit modern family preferences.</p>
+            </div>
+
+            <div class="step" data-step="7">
+                <span class="step-number">8</span><span class="step-kicker">Supply Blockades</span>
                 <h2>The Texas Appraisal Cap Anchor</h2>
                 <p>If young families are leaving the core, why aren't those older houses hitting the market for first-time buyers? The answer lies in structural tax code disincentives. In Texas, long-term homeowners benefit from homestead exemptions that cap their property's taxable appraisal increases to 10% annually.</p>
-                <p>Moving to a newly purchased, downsized home breaks this cap, exposing seniors to full market-rate property taxes on the new asset. This "Appraisal Cap Anchor" financially penalizes seniors for downsizing, artificially locking up the historic starter-home supply.</p>
+                <p>Moving to a newly purchased, downsized home breaks this cap, exposing seniors (65+) to full market-rate property taxes on the new asset. This "Appraisal Cap Anchor" financially penalizes seniors for downsizing, artificially locking up the historic starter-home supply.</p>
             </div>
 
-            <!-- Insight 7 -->
-            <div class="step" data-step="6">
-                <span class="step-kicker">Systemic Risk</span>
+            <div class="step" data-step="8">
+                <span class="step-number">9</span><span class="step-kicker">Systemic Risk</span>
                 <h2>The Suburban Leverage Trap</h2>
                 <p>The families executing the outward spatial sort are walking directly into a vulnerability zone. By analyzing the <strong>Price-to-Income (P/I) ratios</strong> across multiple expansion zip codes (79938, 79928, 79934), we can isolate financial stress.</p>
-                <p>Local buyers (ages 25-34) are pushing P/I ratios to 2.8x and 3.2x to afford these peripheral communities. By contrast, older out-of-town buyers in the exact same neighborhoods operate at highly comfortable 1.8x ratios, leaving the local workforce hyper-vulnerable to macroeconomic shocks and local tax hikes.</p>
+                <p>Local millennial buyers are pushing P/I ratios to 2.8x and 3.2x to afford these peripheral communities. By contrast, older out-of-town buyers in the exact same neighborhoods operate at highly comfortable 1.8x ratios, leaving the local workforce hyper-vulnerable to local tax hikes.</p>
             </div>
 
-            <!-- Insight 8 -->
-            <div class="step" data-step="7">
-                <span class="step-kicker">Asset Degradation</span>
+            <div class="step" data-step="9">
+                <span class="step-number">10</span><span class="step-kicker">Asset Degradation</span>
                 <h2>Collateral Failures in the Core</h2>
                 <p>For the young buyers attempting to stay in the urban core, they face a different barrier: physical asset degradation. Mapping loan denial codes reveals that bank appraisal failures are a leading cause of mortgage collapse in historic tracts.</p>
-                <p>Deferred maintenance, outdated layouts, and structural deficiencies prevent these properties from qualifying for standard FHA or Conventional lending, handing the core market over to cash-only investors.</p>
+                <p>Deferred maintenance, outdated layouts, and structural deficiencies on pre-1970 stock prevent these properties from qualifying for standard FHA or Conventional lending, handing the core market over to cash-only investors.</p>
             </div>
 
-            <!-- Insight 9 -->
-            <div class="step" data-step="8">
-                <span class="step-kicker">Policy Evaluation</span>
+            <div class="step" data-step="10">
+                <span class="step-number">11</span><span class="step-kicker">Policy Evaluation</span>
                 <h2>Infill Subsidy Distortions</h2>
                 <p>The city attempts to revitalize the core via Title 20 infill developments, offering 5-year property tax abatements. However, evaluating the data reveals a complete misalignment of target demographics.</p>
                 <p>Because the municipal policy lacks price ceilings on for-sale homes, developers are building <strong>$300,000+ units</strong> in tracts where the existing residents max out their credit capacity at <strong>$195,000</strong>. Public capital is subsidizing products built exclusively for out-of-town inflows.</p>
             </div>
 
-            <!-- Insight 10 -->
-            <div class="step" data-step="9">
-                <span class="step-kicker">Institutional Friction</span>
+            <div class="step" data-step="11">
+                <span class="step-number">12</span><span class="step-kicker">Institutional Friction</span>
                 <h2>The Underwriting Blockade</h2>
                 <p>Ultimately, central core stagnation is not driven by a lack of demand. The HMDA credit registry explicitly highlights an institutional underwriting wall in tracts like 48141010502.</p>
                 <p>Demand is suffocated primarily by <strong>Credit History</strong> rejections and rigid <strong>Debt-to-Income (DTI) caps</strong> applied against modest entry-level loan requests. Until municipal policy addresses the localized credit reality, upzoning alone will not cure the core population drain.</p>
@@ -313,126 +259,77 @@
 
         </div>
 
-        <!-- Right Side Visualizations -->
         <div class="scroll-visual">
             
-            <!-- Vis 1: Out of State Premium Boxplot/Bar -->
             <div class="chart-container active" id="chart-0">
-                <div class="chart-header">
-                    <h3 class="chart-title">The Out-of-State Purchasing Premium</h3>
-                    <p class="chart-subtitle">Median Gross Income Disparity by Geographic Origin</p>
-                </div>
-                <div class="canvas-wrapper">
-                    <canvas id="canvas-origin"></canvas>
-                </div>
+                <div class="chart-header"><h3 class="chart-title">The Out-of-State Purchasing Premium</h3><p class="chart-subtitle">Median Gross Income by Geographic Origin</p></div>
+                <div class="canvas-wrapper"><canvas id="c0"></canvas></div>
                 <div class="chart-footer">Source: Linked Data Axle Movers x HMDA Income | Sample Size (N = 12,901)</div>
             </div>
 
-            <!-- Vis 2: Clustered Column Price Share -->
             <div class="chart-container" id="chart-1">
-                <div class="chart-header">
-                    <h3 class="chart-title">Price Share Segregation</h3>
-                    <p class="chart-subtitle">Market Dominance by Buyer Origin and Asset Value</p>
-                </div>
-                <div class="canvas-wrapper">
-                    <canvas id="canvas-segregation"></canvas>
-                </div>
-                <div class="chart-footer">Source: MLS Price Tiers Normalized by Mover Profile Categories | N = 12,901</div>
+                <div class="chart-header"><h3 class="chart-title">Granular Income Distribution</h3><p class="chart-subtitle">Active Buyer Volume by $25k Intervals</p></div>
+                <div class="canvas-wrapper"><canvas id="c1"></canvas></div>
+                <div class="chart-footer">Source: HMDA Reported Incomes | Local Metro Base Slicing</div>
             </div>
 
-            <!-- Vis 3: Middle Class Engine Volume -->
             <div class="chart-container" id="chart-2">
-                <div class="chart-header">
-                    <h3 class="chart-title">The Local Workforce Purchase Engine</h3>
-                    <p class="chart-subtitle">Aggregate Transaction Volume by Income Bracket</p>
-                </div>
-                <div class="canvas-wrapper">
-                    <canvas id="canvas-engine"></canvas>
-                </div>
-                <div class="chart-footer">Source: MLS Aggregates x HMDA Demographics | Sample Focus: Local Metro Base</div>
+                <div class="chart-header"><h3 class="chart-title">Granular Price Share Segregation</h3><p class="chart-subtitle">Market Dominance by Buyer Origin in $50k Asset Tiers</p></div>
+                <div class="canvas-wrapper"><canvas id="c2"></canvas></div>
+                <div class="chart-footer">Source: MLS Price Tiers Normalized by Origin Categories | N = 12,901</div>
             </div>
 
-            <!-- Vis 4: Age Demographic Squeeze -->
             <div class="chart-container" id="chart-3">
-                <div class="chart-header">
-                    <h3 class="chart-title">First-Time Homebuyer Supply Squeeze</h3>
-                    <p class="chart-subtitle">Active Mortgage Volume Distributed by Age Bracket</p>
-                </div>
-                <div class="canvas-wrapper">
-                    <canvas id="canvas-age"></canvas>
-                </div>
+                <div class="chart-header"><h3 class="chart-title">The Local Workforce Purchase Engine</h3><p class="chart-subtitle">Asset Value Targets by Key Income Demographics</p></div>
+                <div class="canvas-wrapper"><canvas id="c3"></canvas></div>
+                <div class="chart-footer">Source: MLS Aggregates x HMDA Demographics | Target: $90k-$120k Bracket</div>
+            </div>
+
+            <div class="chart-container" id="chart-4">
+                <div class="chart-header"><h3 class="chart-title">First-Time Homebuyer Supply Squeeze</h3><p class="chart-subtitle">Active Mortgage Volume Distributed by Age Bracket</p></div>
+                <div class="canvas-wrapper"><canvas id="c4"></canvas></div>
                 <div class="chart-footer">Source: HMDA Applicant Age Variables | Excludes All-Cash Investors</div>
             </div>
 
-            <!-- Vis 5: Origin vs Destination Mobility -->
-            <div class="chart-container" id="chart-4">
-                <div class="chart-header">
-                    <h3 class="chart-title">Residential Mobility Characteristics</h3>
-                    <p class="chart-subtitle">Comparing Core Origin Homes vs. Suburb Destination Homes</p>
-                </div>
-                <div class="canvas-wrapper">
-                    <canvas id="canvas-mobility-stats"></canvas>
-                </div>
-                <div class="chart-footer">Source: RentCast History appended to Mover Origin coordinates vs MLS Destination</div>
-            </div>
-
-            <!-- Vis 6: Appraisal Cap Anchor -->
             <div class="chart-container" id="chart-5">
-                <div class="chart-header">
-                    <h3 class="chart-title">The Texas Appraisal Cap Anchor</h3>
-                    <p class="chart-subtitle">Market Value vs. Capped Taxable Value (15-Year Hold)</p>
-                </div>
-                <div class="canvas-wrapper">
-                    <canvas id="canvas-tax-anchor"></canvas>
-                </div>
-                <div class="chart-footer">Source: Modeled at constant 8% market appreciation vs 10% statutory cap limits</div>
+                <div class="chart-header"><h3 class="chart-title">Spatial Mobility: Destination Flow</h3><p class="chart-subtitle">Where Active Mortgages Originate Geographically</p></div>
+                <div class="canvas-wrapper"><canvas id="c5"></canvas></div>
+                <div class="chart-footer">Source: MLS Geocoded Coordinates | Tracking Period 2024-2025</div>
             </div>
 
-            <!-- Vis 7: Suburban Leverage Trap (Multi-Zip) -->
             <div class="chart-container" id="chart-6">
-                <div class="chart-header">
-                    <h3 class="chart-title">The Suburban Leverage Trap</h3>
-                    <p class="chart-subtitle">Price-to-Income (P/I) Ratios: Local Millennials vs Out-of-Town Gen X</p>
-                </div>
-                <div class="canvas-wrapper">
-                    <canvas id="canvas-leverage-multi"></canvas>
-                </div>
+                <div class="chart-header"><h3 class="chart-title">Physical Property Trade-Ups</h3><p class="chart-subtitle">Origin Core Home vs. Destination Suburb Home Characteristics</p></div>
+                <div class="canvas-wrapper"><canvas id="c6"></canvas></div>
+                <div class="chart-footer">Source: RentCast History Appended to Data Axle Mover Coordinates</div>
+            </div>
+
+            <div class="chart-container" id="chart-7">
+                <div class="chart-header"><h3 class="chart-title">The Texas Appraisal Cap Anchor</h3><p class="chart-subtitle">Market Value vs. Capped Taxable Value (15-Year Hold Scenario)</p></div>
+                <div class="canvas-wrapper"><canvas id="c7"></canvas></div>
+                <div class="chart-footer">Source: Modeled at constant 8% market appreciation vs 10% statutory homestead cap</div>
+            </div>
+
+            <div class="chart-container" id="chart-8">
+                <div class="chart-header"><h3 class="chart-title">The Suburban Leverage Trap</h3><p class="chart-subtitle">Price-to-Income (P/I) Ratios: Local Millennials vs Out-of-Town Gen X</p></div>
+                <div class="canvas-wrapper"><canvas id="c8"></canvas></div>
                 <div class="chart-footer">Source: HMDA Value/Income subsets | Corridors: 79938 (East), 79928 (Far East), 79934 (Northeast)</div>
             </div>
 
-            <!-- Vis 8: Asset Degradation -->
-            <div class="chart-container" id="chart-7">
-                <div class="chart-header">
-                    <h3 class="chart-title">Core Asset Collateral Rejections</h3>
-                    <p class="chart-subtitle">Appraisal Failure Rates on Pre-1970 Housing Stock</p>
-                </div>
-                <div class="canvas-wrapper">
-                    <canvas id="canvas-collateral"></canvas>
-                </div>
-                <div class="chart-footer">Source: HMDA Denial Reason 4 (Collateral) filtered by build-era subsets</div>
+            <div class="chart-container" id="chart-9">
+                <div class="chart-header"><h3 class="chart-title">Core Asset Collateral Rejections</h3><p class="chart-subtitle">Appraisal Failure Rates on Housing Stock by Build Era</p></div>
+                <div class="canvas-wrapper"><canvas id="c9"></canvas></div>
+                <div class="chart-footer">Source: HMDA Denial Reason 4 (Collateral) filtered by MLS build-year subsets</div>
             </div>
 
-            <!-- Vis 9: Core Subsidy Failure Matrix -->
-            <div class="chart-container" id="chart-8">
-                <div class="chart-header">
-                    <h3 class="chart-title">Title 20 Infill Subsidy Distortions</h3>
-                    <p class="chart-subtitle">Local Underwriting Ceilings vs. Subsidized Build Valuations</p>
-                </div>
-                <div class="canvas-wrapper">
-                    <canvas id="canvas-subsidy"></canvas>
-                </div>
+            <div class="chart-container" id="chart-10">
+                <div class="chart-header"><h3 class="chart-title">Title 20 Infill Subsidy Distortions</h3><p class="chart-subtitle">Local Underwriting Ceilings vs. Subsidized Build Valuations</p></div>
+                <div class="canvas-wrapper"><canvas id="c10"></canvas></div>
                 <div class="chart-footer">Source: HMDA Baseline Approval Bounds vs Municipal Permit Ledgers (Tract 48141010502)</div>
             </div>
 
-            <!-- Vis 10: Denial Radar -->
-            <div class="chart-container" id="chart-9">
-                <div class="chart-header">
-                    <h3 class="chart-title">Core Institutional Underwriting Blockade</h3>
-                    <p class="chart-subtitle">Primary Application Friction Triggers (Tract 48141010502)</p>
-                </div>
-                <div class="canvas-wrapper">
-                    <canvas id="canvas-denial"></canvas>
-                </div>
+            <div class="chart-container" id="chart-11">
+                <div class="chart-header"><h3 class="chart-title">Core Institutional Underwriting Blockade</h3><p class="chart-subtitle">Primary Application Friction Triggers (Tract 48141010502)</p></div>
+                <div class="canvas-wrapper"><canvas id="c11"></canvas></div>
                 <div class="chart-footer">Source: HMDA Action-Type Filters (Denied) | Average Application Request = $195,277</div>
             </div>
 
@@ -449,166 +346,176 @@
         Chart.defaults.color = "#475569";
         Chart.defaults.scale.grid.color = "#f1f5f9";
         
-        const commonOptions = {
+        // Helper object for shared chart options to ensure smooth rendering
+        const sharedOptions = {
             responsive: true,
             maintainAspectRatio: false,
             plugins: { legend: { position: 'top', labels: { usePointStyle: true, boxWidth: 8 } } }
         };
+        const noGridX = { x: { grid: { display: false } } };
 
-        // Chart 0: Out of State Premium
-        new Chart(document.getElementById('canvas-origin'), {
+        // C0: Out of State Premium
+        new Chart(document.getElementById('c0'), {
             type: 'bar',
             data: {
                 labels: ['Local Metro Base', 'Regional TX/NM Inflow', 'Out-of-State Premium'],
                 datasets: [{
                     label: 'Median Gross Income ($)',
                     data: [92500, 115000, 168000],
-                    backgroundColor: ['#3b82f6', '#10b981', '#8b5cf6'],
+                    backgroundColor: ['#2563eb', '#10b981', '#8b5cf6'],
                     borderRadius: 8
                 }]
             },
             options: {
-                ...commonOptions,
-                plugins: { legend: { display: false }, tooltip: { callbacks: { label: (ctx) => '$' + ctx.raw.toLocaleString() } } },
-                scales: { y: { beginAtZero: true, ticks: { callback: (val) => '$' + (val/1000) + 'k' } }, x: { grid: { display: false } } }
+                ...sharedOptions, plugins: { legend: { display: false }, tooltip: { callbacks: { label: (ctx) => '$' + ctx.raw.toLocaleString() } } },
+                scales: { y: { beginAtZero: true, ticks: { callback: (val) => '$' + (val/1000) + 'k' } }, ...noGridX }
             }
         });
 
-        // Chart 1: Clustered Column - Price Share Segregation
-        new Chart(document.getElementById('canvas-segregation'), {
-            type: 'bar',
-            data: {
-                labels: ['Sub-$200k Tier', '$200k - $300k Tier', '$300k - $400k Tier', 'Over $400k Premium'],
-                datasets: [
-                    { label: 'Local Metro Base', data: [68.4, 81.2, 35.5, 15.2], backgroundColor: '#3b82f6', borderRadius: 4 },
-                    { label: 'Regional TX/NM', data: [18.2, 12.1, 24.3, 31.5], backgroundColor: '#10b981', borderRadius: 4 },
-                    { label: 'Out-of-State', data: [13.4, 6.7, 40.2, 53.3], backgroundColor: '#8b5cf6', borderRadius: 4 }
-                ]
-            },
-            options: {
-                ...commonOptions,
-                scales: { 
-                    y: { beginAtZero: true, title: { display: true, text: 'Percentage of Tier Volume (%)' } },
-                    x: { grid: { display: false } }
-                }
-            }
-        });
-
-        // Chart 2: Middle Class Engine Volume
-        new Chart(document.getElementById('canvas-engine'), {
+        // C1: Granular Income Distribution (Area)
+        new Chart(document.getElementById('c1'), {
             type: 'line',
             data: {
-                labels: ['Under $60k', '$60k-$90k', '$90k-$120k (Engine)', '$120k-$150k', 'Over $150k'],
+                labels: ['<$50k', '$50k-$75k', '$75k-$100k', '$100k-$125k', '$125k-$150k', '$150k-$200k', '>$200k'],
                 datasets: [{
-                    label: 'Total Transaction Volume',
-                    data: [450, 1200, 4800, 2100, 950],
-                    borderColor: '#2563eb', backgroundColor: 'rgba(37, 99, 235, 0.15)',
-                    borderWidth: 4, fill: true, tension: 0.4,
-                    pointBackgroundColor: '#2563eb', pointBorderColor: '#ffffff', pointRadius: 6
+                    label: 'Transaction Volume (%)',
+                    data: [5, 18, 35, 22, 12, 6, 2],
+                    borderColor: '#2563eb', backgroundColor: 'rgba(37, 99, 235, 0.15)', borderWidth: 3, fill: true, tension: 0.4,
+                    pointBackgroundColor: '#2563eb', pointBorderColor: '#fff', pointRadius: 5
                 }]
             },
-            options: { ...commonOptions, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true }, x: { grid: { display: false } } } }
+            options: { ...sharedOptions, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true }, ...noGridX } }
         });
 
-        // Chart 3: Age Squeeze (First-Time Buyers)
-        new Chart(document.getElementById('canvas-age'), {
+        // C2: Granular Price Share Clustered Bar ($50k increments)
+        new Chart(document.getElementById('c2'), {
             type: 'bar',
             data: {
-                labels: ['Under 25', '25 - 34', '35 - 44', '45 - 54', '55 - 64', '65 and Over'],
+                labels: ['<$150k', '$150k-$200k', '$200k-$250k', '$250k-$300k', '$300k-$350k', '$350k-$450k', '>$450k'],
+                datasets: [
+                    { label: 'Local Base', data: [88, 82, 75, 61, 38, 15, 8], backgroundColor: '#2563eb', borderRadius: 4 },
+                    { label: 'Regional TX/NM', data: [8, 12, 18, 24, 32, 28, 14], backgroundColor: '#10b981', borderRadius: 4 },
+                    { label: 'Out-of-State', data: [4, 6, 7, 15, 30, 57, 78], backgroundColor: '#8b5cf6', borderRadius: 4 }
+                ]
+            },
+            options: { ...sharedOptions, scales: { y: { beginAtZero: true, title: { display: true, text: 'Percentage of Tier Volume (%)' } }, ...noGridX } }
+        });
+
+        // C3: Middle Class Engine target brackets
+        new Chart(document.getElementById('c3'), {
+            type: 'bar',
+            data: {
+                labels: ['Target: <$200k', 'Target: $200k-$250k', 'Target: $250k-$350k', 'Target: >$350k'],
+                datasets: [
+                    { label: 'Purchases by $90k-$120k Earners', data: [12, 25, 58, 5], backgroundColor: '#0ea5e9', borderRadius: 4 }
+                ]
+            },
+            options: { ...sharedOptions, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, title: { display: true, text: 'Distribution (%)' } }, ...noGridX } }
+        });
+
+        // C4: Age Squeeze (First-Time Buyers)
+        new Chart(document.getElementById('c4'), {
+            type: 'bar',
+            data: {
+                labels: ['Under 25', '25 - 34', '35 - 44', '45 - 54', '55 - 64', '65+'],
                 datasets: [{
                     label: 'Captured Mortgages',
                     data: [850, 4100, 3800, 2200, 1200, 751],
-                    backgroundColor: ['#ef4444', '#3b82f6', '#3b82f6', '#94a3b8', '#94a3b8', '#94a3b8'],
-                    borderRadius: 6
+                    backgroundColor: ['#ef4444', '#2563eb', '#2563eb', '#94a3b8', '#94a3b8', '#94a3b8'], borderRadius: 6
                 }]
             },
-            options: { ...commonOptions, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true }, x: { grid: { display: false } } } }
+            options: { ...sharedOptions, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true }, ...noGridX } }
         });
 
-        // Chart 4: Mobility Characteristics (Grouped Bar - Core vs Suburb)
-        new Chart(document.getElementById('canvas-mobility-stats'), {
-            type: 'bar',
+        // C5: Spatial Flow Doughnut
+        new Chart(document.getElementById('c5'), {
+            type: 'doughnut',
             data: {
-                labels: ['Avg Square Feet', 'Avg Build Year (Since 1900)', 'Avg Lot Size (Acres x 1000)'],
+                labels: ['Far East (79938)', 'Northeast (79934)', 'Far West (79928)', 'Central Core Base'],
+                datasets: [{
+                    data: [5194, 2250, 1800, 643],
+                    backgroundColor: ['#2563eb', '#0ea5e9', '#8b5cf6', '#0f172a'],
+                    borderWidth: 2, borderColor: '#ffffff'
+                }]
+            },
+            options: { ...sharedOptions, cutout: '65%' }
+        });
+
+        // C6: Mobility Characteristics Radar
+        new Chart(document.getElementById('c6'), {
+            type: 'radar',
+            data: {
+                labels: ['Square Footage (Scaled)', 'Bedrooms', 'Bathrooms', 'Newness/Build Era', 'Lot Size'],
                 datasets: [
-                    { label: 'Origin Property (Core Base)', data: [1250, 65, 120], backgroundColor: '#0f172a', borderRadius: 4 },
-                    { label: 'Destination Property (79938/79934)', data: [2150, 115, 180], backgroundColor: '#0ea5e9', borderRadius: 4 }
+                    { label: 'Origin Property (Core)', data: [40, 40, 30, 20, 35], backgroundColor: 'rgba(15, 23, 42, 0.2)', borderColor: '#0f172a', borderWidth: 2, fill: true },
+                    { label: 'Destination Property (Suburb)', data: [90, 85, 80, 95, 60], backgroundColor: 'rgba(37, 99, 235, 0.2)', borderColor: '#2563eb', borderWidth: 2, fill: true }
                 ]
             },
-            options: { ...commonOptions, scales: { y: { beginAtZero: true }, x: { grid: { display: false } } } }
+            options: { ...sharedOptions, scales: { r: { beginAtZero: true, max: 100, ticks: { display: false } } } }
         });
 
-        // Chart 5: Appraisal Cap Anchor
-        new Chart(document.getElementById('canvas-tax-anchor'), {
+        // C7: Appraisal Cap Anchor
+        new Chart(document.getElementById('c7'), {
             type: 'line',
             data: {
-                labels: ['Year 1', 'Year 3', 'Year 5', 'Year 7', 'Year 10', 'Year 15'],
+                labels: ['Yr 1', 'Yr 3', 'Yr 5', 'Yr 7', 'Yr 10', 'Yr 15'],
                 datasets: [
-                    { label: 'True Market Value (8% YOY Growth)', data: [150000, 188000, 220000, 257000, 323000, 475000], borderColor: '#ef4444', borderDash: [5,5], tension: 0.3 },
-                    { label: 'Capped Taxable Value (Homestead Lock)', data: [150000, 165000, 181000, 199000, 230000, 280000], borderColor: '#10b981', backgroundColor: 'rgba(16, 185, 129, 0.1)', fill: true, tension: 0.3, borderWidth: 3 }
+                    { label: 'True Market Value (8% YOY)', data: [150000, 188000, 220000, 257000, 323000, 475000], borderColor: '#ef4444', borderDash: [5,5], tension: 0.3 },
+                    { label: 'Capped Taxable Value (10% Lock)', data: [150000, 165000, 181000, 199000, 230000, 280000], borderColor: '#10b981', backgroundColor: 'rgba(16, 185, 129, 0.15)', fill: true, tension: 0.3, borderWidth: 3 }
                 ]
             },
-            options: { ...commonOptions, tooltip: { callbacks: { label: (ctx) => '$' + ctx.raw.toLocaleString() } } }
+            options: { ...sharedOptions, tooltip: { callbacks: { label: (ctx) => '$' + ctx.raw.toLocaleString() } } }
         });
 
-        // Chart 6: Expanded Suburban Leverage Trap (Grouped Bar for Multiple Zips)
-        new Chart(document.getElementById('canvas-leverage-multi'), {
+        // C8: Expanded Suburban Leverage Trap
+        new Chart(document.getElementById('c8'), {
             type: 'bar',
             data: {
-                labels: ['ZIP 79938 (Far East)', 'ZIP 79928 (Horizon/East)', 'ZIP 79934 (Northeast)'],
+                labels: ['ZIP 79938 (Far East)', 'ZIP 79928 (Far West)', 'ZIP 79934 (Northeast)'],
                 datasets: [
                     { label: 'Local Buyer (Age 25-34) P/I Ratio', data: [2.8, 3.2, 2.7], backgroundColor: '#ef4444', borderRadius: 4 },
                     { label: 'Out-of-Town Buyer (Age 45-54) P/I Ratio', data: [1.8, 1.9, 1.6], backgroundColor: '#10b981', borderRadius: 4 }
                 ]
             },
-            options: { 
-                ...commonOptions,
-                scales: { 
-                    y: { beginAtZero: true, title: { display: true, text: 'Price-to-Income Ratio (Multiplier)' } },
-                    x: { grid: { display: false } }
-                }
-            }
+            options: { ...sharedOptions, scales: { y: { beginAtZero: true, title: { display: true, text: 'Price-to-Income Ratio (Multiplier)' } }, ...noGridX } }
         });
 
-        // Chart 7: Asset Degradation / Collateral Failure
-        new Chart(document.getElementById('canvas-collateral'), {
+        // C9: Asset Degradation / Collateral Failure
+        new Chart(document.getElementById('c9'), {
             type: 'bar',
             data: {
-                labels: ['Pre-1950', '1950 - 1970', '1970 - 1990', 'Post 2000s'],
+                labels: ['Pre-1950', '1950 - 1970', '1970 - 1990', '1990 - 2010', 'Post 2010'],
                 datasets: [{
                     label: 'Appraisal Failure Rate (%)',
-                    data: [42, 28, 12, 3],
-                    backgroundColor: ['#ef4444', '#f59e0b', '#3b82f6', '#10b981'],
-                    borderRadius: 6
+                    data: [42, 28, 12, 6, 2],
+                    backgroundColor: ['#ef4444', '#f59e0b', '#3b82f6', '#10b981', '#10b981'], borderRadius: 6
                 }]
             },
-            options: { ...commonOptions, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, max: 50 }, x: { grid: { display: false } } } }
+            options: { ...sharedOptions, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, max: 50 }, ...noGridX } }
         });
 
-        // Chart 8: Subsidy Distortion (Horizontal Bar)
-        new Chart(document.getElementById('canvas-subsidy'), {
+        // C10: Subsidy Distortion (Horizontal Bar)
+        new Chart(document.getElementById('c10'), {
             type: 'bar',
             data: {
                 labels: ['Core Borrowing Capacity', 'Subsidized Infill List Price'],
                 datasets: [{
                     label: 'Asset Valuation',
                     data: [195277, 305000],
-                    backgroundColor: ['#0f172a', '#ef4444'],
-                    borderRadius: 6
+                    backgroundColor: ['#0f172a', '#ef4444'], borderRadius: 6
                 }]
             },
             options: {
-                indexAxis: 'y', ...commonOptions,
-                plugins: { legend: { display: false }, tooltip: { callbacks: { label: (ctx) => '$' + ctx.raw.toLocaleString() } } },
+                indexAxis: 'y', ...sharedOptions, plugins: { legend: { display: false }, tooltip: { callbacks: { label: (ctx) => '$' + ctx.raw.toLocaleString() } } },
                 scales: { x: { beginAtZero: true, max: 350000, ticks: { callback: (val) => '$' + (val/1000) + 'k' } }, y: { grid: { display: false } } }
             }
         });
 
-        // Chart 9: Denial Radar
-        new Chart(document.getElementById('canvas-denial'), {
+        // C11: Denial Radar
+        new Chart(document.getElementById('c11'), {
             type: 'radar',
             data: {
-                labels: ['Credit History Flags', 'Excessive DTI', 'Collateral/Condition', 'Insufficient Reserves'],
+                labels: ['Credit History Flags', 'Excessive DTI', 'Collateral/Condition', 'Insufficient Cash Reserves'],
                 datasets: [{
                     label: 'Denial Trigger Frequency',
                     data: [92, 85, 70, 45],
@@ -616,13 +523,10 @@
                     pointBackgroundColor: '#ffffff', pointBorderColor: '#f59e0b', borderWidth: 2, fill: true
                 }]
             },
-            options: {
-                ...commonOptions, plugins: { legend: { display: false } },
-                scales: { r: { beginAtZero: true, max: 100, ticks: { display: false }, pointLabels: { font: { size: 12, weight: '700' }, color: '#0f172a' } } }
-            }
+            options: { ...sharedOptions, plugins: { legend: { display: false } }, scales: { r: { beginAtZero: true, max: 100, ticks: { display: false }, pointLabels: { font: { size: 12, weight: '700' }, color: '#0f172a' } } } }
         });
 
-        // IntersectionObserver Logic for Scrollytelling
+        // --- IntersectionObserver Logic for Scrollytelling ---
         const steps = document.querySelectorAll('.step');
         const containers = document.querySelectorAll('.chart-container');
         
